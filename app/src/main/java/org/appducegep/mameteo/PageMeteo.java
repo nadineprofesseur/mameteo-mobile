@@ -103,7 +103,8 @@ public class PageMeteo extends AppCompatActivity {
 
             TextView affichageMeteo = (TextView)this.findViewById(R.id.meteo);
             affichageMeteo.setText(soleilOuNuage + "\n");
-            affichageMeteo.append("\n\n\n\n\n");
+            affichageMeteo.append("\n\n");
+            affichageMeteo.append("Température : " + temperature + "\n");
             affichageMeteo.append("Vent : " + vent + "\n");
             affichageMeteo.append("Humidite : " + humidite + "\n");
 
