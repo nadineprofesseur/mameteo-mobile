@@ -12,20 +12,27 @@ import java.util.Date;
 // https://developer.android.com/training/data-storage/sqlite.html
 
 public class MeteoDAO extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "Meteo.db";
 
     public MeteoDAO(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // https://www.sqlite.org/datatype3.html
     String SQL_CREATION_TABLE_1 = "create table meteo(id INTEGER PRIMARY KEY, ville TEXT, soleilOuNuage TEXT, date TEXT)";
-    String SQL_CREATION_TABLE = "create table meteo(id INTEGER PRIMARY KEY, ville TEXT, soleilOuNuage TEXT, date TEXT, vent TEXT)";
+    String SQL_CREATION_TABLE_2 = "create table meteo(id INTEGER PRIMARY KEY, ville TEXT, soleilOuNuage TEXT, date TEXT, vent TEXT)";
+    String SQL_CREATION_TABLE_3 = "create table meteo(id INTEGER PRIMARY KEY, ville TEXT, soleilOuNuage TEXT, date TEXT, vent TEXT, temperature REAL)";
+
+    String SQL_MISEAJOUR_TABLE_1_A_2_A = "alter table meteo add column vent TEXT";
+    String SQL_MISEAJOUR_TABLE_1_A_2_B = "alter table meteo add column humidite INTEGER";
+    String SQL_MISEAJOUR_TABLE_2_A_3 = "alter table meteo add column temperature REAL";
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
         Log.d("BASEDEDONNEES","MeteoDAO.create()");
-        db.execSQL(SQL_CREATION_TABLE);
+        db.execSQL(SQL_CREATION_TABLE_3);
 
     }
 
@@ -34,10 +41,14 @@ public class MeteoDAO extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int avant, int apres) {
         Log.d("BASEDEDONNEES","MeteoDAO.onUpgrade() de " + avant + " a " + apres);
-        String SQL_MISEAJOUR_TABLE_A = "alter table meteo add column vent TEXT";
-        db.execSQL(SQL_MISEAJOUR_TABLE_A);
-        String SQL_MISEAJOUR_TABLE_B = "alter table meteo add column humidite INTEGER";
-        db.execSQL(SQL_MISEAJOUR_TABLE_B);
+
+        if(avant == 1 && apres >= 2) {
+            db.execSQL(SQL_MISEAJOUR_TABLE_1_A_2_A);
+            db.execSQL(SQL_MISEAJOUR_TABLE_1_A_2_B);
+        }
+        if(avant <= 2 && apres == 3) {
+            db.execSQL(SQL_MISEAJOUR_TABLE_2_A_3);
+        }
     }
 
     // on peut aussi tolerer les nouveaux champs si ils ne derangent pas - voir aussi la politique de la vie privee
