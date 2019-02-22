@@ -28,26 +28,6 @@ public class PageMeteo extends AppCompatActivity {
 
     private TextView libelleTitre;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_meteo:
-                    libelleTitre.setText(R.string.titre_accueil);
-                    return true;
-                case R.id.navigation_meteo_detail:
-                    libelleTitre.setText(R.string.titre_meteo_detail);
-                    return true;
-                case R.id.navigation_notifications:
-                    libelleTitre.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +40,6 @@ public class PageMeteo extends AppCompatActivity {
         }
 
         libelleTitre = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         String CLE = "c826c0724ab24c94879184835192102";
         String xml = "";

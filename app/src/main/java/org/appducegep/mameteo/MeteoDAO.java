@@ -27,12 +27,12 @@ public class MeteoDAO extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int avant, int apres) {
 
     }
 
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onUpgrade(db, oldVersion, newVersion);
+    public void onDowngrade(SQLiteDatabase db, int avant, int apres) {
+        //onUpgrade(db, avant, apres);
     }
 
     public void ajouterMeteo(String soleilOuNuage)
