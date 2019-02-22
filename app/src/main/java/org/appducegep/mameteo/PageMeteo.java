@@ -116,6 +116,9 @@ public class PageMeteo extends AppCompatActivity {
             System.out.println("/// Humidite = " + humidite);
             System.out.println("//////////////////////");
 
+            TextView affichageTitre = (TextView)this.findViewById(R.id.titre_page_meteo);
+            affichageTitre.setText("Météo de " + ville);
+
             TextView affichageMeteo = (TextView)this.findViewById(R.id.meteo);
             affichageMeteo.setText(soleilOuNuage + "\n");
             affichageMeteo.append("\n\n\n\n\n");
